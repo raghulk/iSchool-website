@@ -1,0 +1,76 @@
+﻿@{
+    ViewData["Title"] = "Undergraduate Degrees";
+}
+
+@model Project3_FinalExam.ViewModels.UndergradViewModel
+
+<h2>@Model.Title</h2>
+
+<div class="position-relative pt-3" id="myUnderDegrees"></div>
+
+@foreach (var under in Model.UnderGradMajors)
+{
+    <h3 id=@String.Concat("myHdng", under.title)><b>@under.title</b></h3>
+
+    <div id=@String.Concat("myDiv", under.degreeName)>
+        <p>@under.title</p>
+        <p>@under.description</p>
+        <p>Concentrations to pick from:</p>
+        <ul>
+            @foreach (var conc in @under.concentrations)
+            {
+                <li>@conc</li>
+
+            }
+        </ul>
+    </div>
+}
+
+<h2 class="position-relative pt-3">Undergraduate Minors</h2>
+
+<div id="myUnderMinors" class="position-relative pt-2 pb-md-6 pb-5">
+    @foreach (var minor in Model.UnderGradMinors)
+    {
+        <h3 id=@String.Concat("heading", minor.title)><b>@minor.title</b></h3>
+
+        <div id=@String.Concat("div", minor.title)>
+            <p>@minor.title</p>
+            <p>@minor.description</p>
+            <p>Courses:</p>
+            <ul>
+                @foreach (var conc in @minor.courses)
+                {
+                    <li>@conc</li>
+
+                }
+            </ul>
+        </div>
+    }
+
+</div>
+@*Get jQuery and jQueryUI Scripts from wwwroot*@
+<script src="~/jquery/jquery.js"></script>
+<link rel="stylesheet" href="~/jqueryui/themes/base/jquery-ui.min.css">
+<script src="~/jqueryui/jquery-ui.js"></script>
+<script>
+// Create Accordion
+    let headings = document.querySelectorAll("[id^='myHdng']");
+    let divs = document.querySelectorAll("[id^='myDiv']");
+
+    for (var i = 0; i < headings.length; i++) {
+        $("#myUnderDegrees").append($("#" + headings[i].id));
+        $("#myUnderDegrees").append($("#" + divs[i].id));
+    }
+
+    $('#myUnderDegrees').accordion({
+        collapsible: true,
+        active: false,
+        heightStyle: "content"
+    });
+
+    $('#myUnderMinors').accordion({
+        collapsible: true,
+        active: false,
+        heightStyle: "content"
+    });
+</script>

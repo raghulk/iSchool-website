@@ -1,0 +1,67 @@
+﻿@{
+    ViewData["Title"] = "Employment";
+}
+
+@model Project3_FinalExam.ViewModels.EmploymentViewModel
+
+<div>
+    <h2>@Model.Title</h2>
+    <div class="position-relative pt-3" id="emp-table"></div>
+</div>
+
+<div class="position-relative pt-3 pb-md-6 pb-5">
+    <h2>Co-op Table</h2>
+    <div class="position-relative pt-3" id="coop-table"></div> 
+</div>
+
+@*Get jQuery and jQueryUI Scripts from wwwroot*@
+<script src="~/jquery/jquery.js"></script>
+<link rel="stylesheet" href="~/jqueryui/themes/base/jquery-ui.min.css">
+<script src="~/jqueryui/jquery-ui.js"></script>
+<!-- jsGrid -->
+<script type="text/javascript" src="~/jsgrid/jsgrid.min.js"></script>
+<link type="text/css" rel="stylesheet" href="~/jsgrid/jsgrid.min.css" />
+<link type="text/css" rel="stylesheet" href="~/jsgrid/jsgrid-theme.min.css" />
+<script>
+    // Create table
+    var empInfo = @Html.Raw(Json.Serialize(Model.EmpInfo));
+    var coopInfo = @Html.Raw(Json.Serialize(Model.CoopInfo));
+
+    $("#emp-table").jsGrid({
+        width: "100%",
+        height: "600px",
+
+        inserting: false,
+        editing: false,
+        sorting: true,
+        paging: true,
+
+        data: JSON.parse(empInfo).professionalEmploymentInformation,
+
+        fields: [
+            { name: "employer", title: "Employer", type: "text", width: 130 },
+            { name: "degree", title: "Degree", type: "text", width: 50 },
+            { name: "city", title: "City", type: "text", width: 75 },
+            { name: "title", title: "Title", type: "text", width: 125 },
+            { name: "startDate", title: "Start Date", type: "text", width: 50 }
+        ]
+    });
+    $("#coop-table").jsGrid({
+        width: "100%",
+        height: "600px",
+
+        inserting: false,
+        editing: false,
+        sorting: true,
+        paging: true,
+
+        data: JSON.parse(coopInfo).coopInformation,
+
+        fields: [
+            { name: "employer", title: "Employer", type: "text", width: 125 },
+            { name: "degree", title: "Degree", type: "text", width: 50 },
+            { name: "city", title: "City", type: "text", width: 75 },
+            { name: "term", title: "Term", type: "text", width: 150 },
+        ]
+    });
+</script>
