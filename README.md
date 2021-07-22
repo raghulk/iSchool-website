@@ -3,7 +3,7 @@
 - Used C#, HTML and jQuery
 
 - Used JsGrid for the employment and accordions for undergraduate and graduate degrees, used dialogs for faculty and staff.
-Used multiple functions to get the Co-op Information and Employment Information. Used RTT theme colors to match RIT branding.
+Used multiple functions to get the Co-op Information and Employment Information. Used RIT theme colors to match RIT branding.
 
 - Requires Windows machine and Visual Studio installed to view the live version. 
 
